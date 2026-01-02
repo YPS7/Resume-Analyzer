@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: resume-backend
+  
+  ai-engine:
+    url: ${AI_ENGINE_URL}
+
+  datasource:
+    # ===============================
+    # ❌ LOCAL POSTGRES (COMMENTED)
+    # ===============================
+    # url: jdbc:postgresql://localhost:5432/resume_db
+
+    # ===============================
+    # ❌ DOCKER POSTGRES (COMMENTED)
+    # ===============================
+    # url: jdbc:postgresql://resume_postgres:5432/resume_db
+
+    # ===============================
+    # ❌ EC2 POSTGRES (COMMENTED)
+    # ===============================
+    # url: jdbc:postgresql://13.50.16.71:5432/resume_db
+
+    # ===============================
+    # ✅ SUPABASE POSTGRES (ACTIVE)
+    # ===============================
+    url: ${DB_URL}
+
+    username: postgres
+    password: ${DB_PASSWORD}
+
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      # ❌ was `update` (unsafe for shared DB)
+      # ✅ use validate for Supabase
+      ddl-auto: validate
+
+    show-sql: true
+
+    properties:
+      hibernate:
+        format_sql: true
+        # ❌ Not required, Hibernate auto-detects
+        # dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+# for later (DO NOT DELETE)
+# url: jdbc:postgresql://resume_postgres:5432/resume_db
